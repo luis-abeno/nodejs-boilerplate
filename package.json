@@ -1,0 +1,45 @@
+{
+  "name": "nodejs-boilerplate",
+  "description": "Just a NodeJs application to quick start a rest api with typescript.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "swagger": "tsoa spec",
+    "start:dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luis-abeno/nodejs-boilerplate.git"
+  },
+  "author": "Luís Abeno",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luis-abeno/nodejs-boilerplate/issues"
+  },
+  "homepage": "https://github.com/luis-abeno/nodejs-boilerplate#readme",
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^18.7.15",
+    "@types/swagger-ui-express": "^4.1.3",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "concurrently": "^7.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "helmet": "^6.0.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.19",
+    "swagger-ui-express": "^4.5.0",
+    "tsoa": "^4.1.2"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "exec": "ts-node src/index.ts"
+  }
+}

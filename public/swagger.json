@@ -1,0 +1,198 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"UserColorsEnum": {
+				"enum": [
+					"Red",
+					"Green",
+					"Blue"
+				],
+				"type": "string"
+			},
+			"GenderEnum": {
+				"enum": [
+					"Male",
+					"Female",
+					"Other"
+				],
+				"type": "string"
+			},
+			"UserDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"birthday": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"favoriteColor": {
+						"$ref": "#/components/schemas/UserColorsEnum"
+					},
+					"gender": {
+						"$ref": "#/components/schemas/GenderEnum"
+					},
+					"isAdmin": {
+						"type": "boolean"
+					},
+					"hasChildreen": {
+						"type": "boolean"
+					},
+					"howManyChildreen": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"birthday",
+					"favoriteColor",
+					"gender",
+					"isAdmin",
+					"hasChildreen"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_UserDto-Array_": {
+				"properties": {
+					"code": {
+						"type": "number",
+						"format": "double"
+					},
+					"body": {
+						"items": {
+							"$ref": "#/components/schemas/UserDto"
+						},
+						"type": "array"
+					},
+					"additionalProperties": {
+						"properties": {},
+						"type": "object"
+					}
+				},
+				"required": [
+					"code",
+					"body"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_UserDto_": {
+				"properties": {
+					"code": {
+						"type": "number",
+						"format": "double"
+					},
+					"body": {
+						"$ref": "#/components/schemas/UserDto"
+					},
+					"additionalProperties": {
+						"properties": {},
+						"type": "object"
+					}
+				},
+				"required": [
+					"code",
+					"body"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "apiKey",
+				"name": "Authorization",
+				"scheme": "bearer",
+				"in": "header",
+				"description": "The token for authentication"
+			},
+			"security": [
+				{
+					"bearerAuth": []
+				}
+			]
+		}
+	},
+	"info": {
+		"title": "nodejs-boilerplate",
+		"version": "1.0.0",
+		"description": "Just a NodeJs application to quick start a rest api with typescript.",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {
+			"name": "Luís Abeno"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/user": {
+			"get": {
+				"operationId": "GetUsers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_UserDto-Array_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Get all users",
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/user/{id}": {
+			"get": {
+				"operationId": "GetUserById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_UserDto_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Get user by id",
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "User id",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
